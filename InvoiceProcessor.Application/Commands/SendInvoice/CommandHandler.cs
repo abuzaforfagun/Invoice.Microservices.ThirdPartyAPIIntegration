@@ -53,8 +53,6 @@ namespace InvoiceProcessor.Application.Commands.SendInvoice
                 {
                     await _mediator.Send(outBoxCommand, cancellationToken);
 
-                    using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-               
                     await _distributedSender.SendMessageAsync(new NewInvoiceAdded(request.MessageId));
 
                     await _mediator.Send(outBoxCommand, cancellationToken);
@@ -66,7 +64,6 @@ namespace InvoiceProcessor.Application.Commands.SendInvoice
                         _logger.LogError(clientResponse.Message);
                         throw new Exception(clientResponse.Message);
                     }
-                    scope.Complete();
                 }, cancellationToken);
             }
         }
