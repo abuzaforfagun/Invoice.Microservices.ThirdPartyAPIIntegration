@@ -1,16 +1,16 @@
-# Invoice Client
+# Invoice Client - Scaleable Microservice
 
 A web application to create and read invoices from third party services with fault tolerance and in high performance.
 
 ## Motivation
 
-● Develop a distributed application with microservices.
-● Implement the microservices to provide better performanceand the ability to scale
+* Develop a distributed application with microservices.
+* Implement the microservices to provide better performanceand the ability to scale
 independently.
-● Ensure audit of the user operations.
-● Implement the application with SOLID and DRY principles.
-● Create reusable components.
-● Develop the application following DDD approach.
+* Ensure audit of the user operations.
+* Implement the application with SOLID and DRY principles.
+* Create reusable components.
+* Develop the application following DDD approach.
 
 
 ## Components and their communication
@@ -81,37 +81,37 @@ Used as the way of communication among microservie(s) in an asynchronous way.
 ## Tradeoffs of the Architecture
 
 Advantages:
-● Ensure invoice creation requests would be processed, maybe not now, but for sure at
+* Ensure invoice creation requests would be processed, maybe not now, but for sure at
 later.
-● Full audit of the customer operations.
-● As we are storing every customer operation event insideour database. So there is no
+* Full audit of the customer operations.
+* As we are storing every customer operation event insideour database. So there is no
 chance of data loss.
-● Caching helps us to deliver faster requests.
-● Individual teams can autonomously develop/deploy microservices with minimum/no
+* Caching helps us to deliver faster requests.
+* Individual teams can autonomously develop/deploy microservices with minimum/no
 communication among other teams.
-● Scale read and write microservice separately, dependingon demand.
-● Because of Gateway, our client application requiresless modification during the internal
+* Scale read and write microservice separately, dependingon demand.
+* Because of Gateway, our client application requiresless modification during the internal
 microservice API changes.
 
 Disadvantages:
-● No matter whether third party service is available or not, customers need to wait for a period of
+* No matter whether third party service is available or not, customers need to wait for a period of
 time to get their invoices live.
-● The logic behind the application gets complex whencompared to a simple CRUD
+* The logic behind the application gets complex whencompared to a simple CRUD
 applications.
-● Creating deployment infrastructure and CI/CD wouldtake more time than monolithic
+* Creating deployment infrastructure and CI/CD wouldtake more time than monolithic
 application.
-● Because of caching there are some chances to get outdateddata when anything gets
+* Because of caching there are some chances to get outdateddata when anything gets
 changed from the back office of third party service.
 
 
 ## Installation and running locally
 
 Prerequisite:
-● .NET 5 SDK and runtime
-● Visual Studio / .NET CLI
-● MS SQL Server
-● Node
-● Angular CLI
+* .NET 5 SDK and runtime
+* Visual Studio / .NET CLI
+* MS SQL Server
+* Node
+* Angular CLI
 
 Running Microservies:
 
@@ -146,9 +146,9 @@ Running Microservies:
 
 ## Possible Improvements
 
-● Remove hard-coded values from the application(Mostly in the client application).
-● Add proper validation in invoice creation.
-● Create a circuit breaker, when third party service fails to process requests continuously.
-● Better naming and folder structure(mostly in client application).
-● Add more unit, integration and E2E test cases.
-● Impose better logging.
+* Remove hard-coded values from the application(Mostly in the client application).
+* Add proper validation in invoice creation.
+* Create a circuit breaker, when third party service fails to process requests continuously.
+* Better naming and folder structure(mostly in client application).
+* Add more unit, integration and E2E test cases.
+* Impose better logging.
