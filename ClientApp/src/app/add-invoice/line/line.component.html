@@ -1,0 +1,29 @@
+<div fxLayout="row">
+    <div fxLayout="column">
+        <form [formGroup]="lineForm" fxLayout="row" novalidate>
+            <div fxLayout="column">
+                <div class="parent-box" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <mat-form-field fxFlex="10" class="input-container">
+                        <input type="number" formControlName="unitNetPrice" matInput placeholder="Unit Price">
+                    </mat-form-field>
+                    <mat-form-field fxFlex class="input-container">
+                        <input formControlName="description" matInput placeholder="Description">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="10" class='input-container'>
+                        <input type="number" matInput formControlName="vatRate" placeholder="Vat Rate">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="15" class='input-container'>
+                        <input type="number" matInput formControlName="discountValue" placeholder="Discount (%)">
+                    </mat-form-field>
+                    
+                    <button fxFlex="10" mat-raised-button color="primary" (click)="onAddLineClick()" class="button-primary">
+                        Add
+                    </button>
+        
+                </div>
+            </div>
+            
+        </form>
+        <app-line-table *ngIf="(lines | async).length > 0" fxLayout="column" [lines]="lines"></app-line-table>
+    </div>
+</div>

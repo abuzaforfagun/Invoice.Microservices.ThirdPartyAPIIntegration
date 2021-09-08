@@ -1,0 +1,38 @@
+<div class="ff-table-container table-new-lines" fxHide.xs="true">
+    <mat-table [dataSource]="lines" matSort matSortDisableClear>
+
+        <ng-container matColumnDef="unitNetPrice">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Unit Net Price</mat-header-cell>
+            <mat-cell *matCellDef="let line">
+                <div>{{line.unitNetPrice}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+            <mat-cell *matCellDef="let line">
+                <div>{{line.description}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vatRate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Vat Rate</mat-header-cell>
+            <mat-cell *matCellDef="let line">
+                <div>{{line.vatRate}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="discountValue">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Discount Value</mat-header-cell>
+            <mat-cell *matCellDef="let line">
+                <div>{{line.discountValue}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+    
+        <mat-row *matRowDef="let row; columns: tableColumns;">
+        </mat-row>
+    </mat-table>
+
+</div>

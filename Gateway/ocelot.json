@@ -1,0 +1,55 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "SwaggerKey": "invoice-reader",
+      "UpstreamPathTemplate": "/api/reader/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "SwaggerKey": "invoice-processor",
+      "UpstreamPathTemplate": "/api/processor/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST" ]
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "invoice-reader",
+      "Config": [
+        {
+          "Name": "Invoice Reader",
+          "Version": "v1",
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "invoice-processor",
+      "Config": [
+        {
+          "Name": "Invoice Processor",
+          "Version": "v1",
+          "Url": "http://localhost:5001/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:44300"
+  }
+}

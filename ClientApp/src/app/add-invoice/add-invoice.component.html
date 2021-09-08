@@ -1,0 +1,91 @@
+<mat-progress-bar *ngIf="(isLoading | async)" mode="query"></mat-progress-bar>
+
+<div class="ff-ultimate-owner-dialog" ngClass.lt-md="mobile">
+    <div class="main-content">
+        <div class="content-wrap">
+            <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="50px">
+                <div fxLayout="column">
+                    <form [formGroup]="invoiceForm" novalidate>
+                        <div fxLayout="column">
+                            <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap.gt-sm="10px">
+                                <div class="left-column column-wrap" fxLayout="column">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Date</mat-label>
+                                        <input  matInput [matDatepicker]="datePicker" formControlName="date">
+                                        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #datePicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap.gt-sm="50px">
+                                <div class="left-column column-wrap" fxLayout="column">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Due Date</mat-label>
+                                        <input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate">
+                                        <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #dueDatePicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form [formGroup]="debtorForm" novalidate>
+                        <div fxLayout="column">
+        
+                            <div class="left-column column-wrap"  fxLayout="row">
+                                <mat-form-field class="input-container">
+                                    <input formControlName="firstName" matInput placeholder="First Name">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="left-column column-wrap"  fxLayout="row">
+                                <mat-form-field class="input-container">
+                                    <input formControlName="lastName" matInput placeholder="Last Name">
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="left-column column-wrap" fxLayout="row">
+                                <mat-form-field class="input-container">
+                                    <input formControlName="email" matInput placeholder="Email">
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="right-column column-wrap" fxLayout="row">
+                                <mat-form-field class='input-container'>
+                                    <input matInput type="phone" formControlName="phone" placeholder="Phone">
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="right-column column-wrap" fxLayout="row">
+                                <mat-form-field class='input-container'>
+                                    <input class='zip-code-input' matInput formControlName="address" placeholder="Address">
+                                </mat-form-field>
+                            </div>
+                            <div class="right-column column-wrap" fxLayout="row">
+                                <mat-form-field class='input-container'>
+                                    <input matInput formControlName="zipCode" placeholder="Zip Code">
+                                </mat-form-field>
+                            </div>
+                            <div class="right-column column-wrap" fxLayout="row">
+                                <mat-form-field class='input-container'>
+                                    <input matInput formControlName="city" placeholder="City">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <app-line [lineForm]="lineForm"></app-line>
+            </div>
+
+            <div class="right-column column-wrap" fxLayoutAlign="start end" fxLayoutGap="50px" fxLayout="row">
+                <button mat-raised-button fxFlex="10" color="primary" [routerLink]="['/']" class="button-primary">
+                    Back
+                </button>
+
+                <button mat-raised-button fxFlex="10" color="primary" (click)="onSaveClick()" class="button-primary">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

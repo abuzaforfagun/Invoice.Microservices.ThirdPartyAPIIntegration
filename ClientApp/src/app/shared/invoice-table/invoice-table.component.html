@@ -1,0 +1,80 @@
+<div class="ff-table-container table-new-invoices" fxHide.xs="true">
+    <mat-table [dataSource]="invoices" matSort matSortDisableClear>
+
+        <ng-container matColumnDef="referenceId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Reference Id</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.referenceId}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="creditorReference">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creditor Reference</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.creditorReference}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="currency">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Currency</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.currency}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="net">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Net Amoount</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.net}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gross">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Gross Amoount</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.gross}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="remainder">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Remainder</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.remainder}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vat">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Vat</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.vat}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="expireDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Expire Date</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.expireDate | date: 'yyyy-MM-dd'}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Due Date</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.dueDate | date: 'yyyy-MM-dd'}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="issueDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Issue Date</mat-header-cell>
+            <mat-cell *matCellDef="let invoice">
+                <div>{{invoice.issueDate | date: 'yyyy-MM-dd'}}</div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+    
+        <mat-row *matRowDef="let row; columns: tableColumns;">
+        </mat-row>
+    </mat-table>
+
+</div>
