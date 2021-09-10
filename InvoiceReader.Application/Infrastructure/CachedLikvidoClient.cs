@@ -1,10 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using Integration.Likvido;
+﻿using Integration.Likvido;
 using Integration.Models;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace InvoiceReader.Application.Infrastructure
 {
@@ -12,13 +11,11 @@ namespace InvoiceReader.Application.Infrastructure
     {
         private readonly ILikvidoClient _client;
         private readonly IDistributedCache _cache;
-        private readonly IMapper _mapper;
 
-        public CachedLikvidoClient(ILikvidoClient client, IDistributedCache cache, IMapper mapper)
+        public CachedLikvidoClient(ILikvidoClient client, IDistributedCache cache)
         {
             _client = client;
             _cache = cache;
-            _mapper = mapper;
         }
         public Task<Result> SendInvoiceAsync(string payload, CancellationToken cancellationToken = new())
         {
