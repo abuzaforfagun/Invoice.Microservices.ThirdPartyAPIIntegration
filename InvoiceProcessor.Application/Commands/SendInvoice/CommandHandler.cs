@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -11,7 +10,6 @@ using InvoiceProcessor.Infrastructure.Persistence;
 using MediatR;
 using InvoiceProcessor.Messages;
 using InvoiceReader.Messages;
-using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -53,9 +51,9 @@ namespace InvoiceProcessor.Application.Commands.SendInvoice
                 {
                     await _mediator.Send(outBoxCommand, cancellationToken);
 
+                    using var transaction = new TransactionScope(TransactionScopeOption.Required,
+                        TransactionScopeAsyncFlowOption.Enabled);
                     await _distributedSender.SendMessageAsync(new NewInvoiceAdded(request.MessageId));
-
-                    await _mediator.Send(outBoxCommand, cancellationToken);
 
                     var clientResponse = await _likvidoClient.SendInvoiceAsync(payload, cancellationToken);
 
@@ -64,6 +62,8 @@ namespace InvoiceProcessor.Application.Commands.SendInvoice
                         _logger.LogError(clientResponse.Message);
                         throw new Exception(clientResponse.Message);
                     }
+
+                    transaction.Complete();
                 }, cancellationToken);
             }
         }
