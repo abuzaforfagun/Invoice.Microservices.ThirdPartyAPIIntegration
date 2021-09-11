@@ -22,7 +22,7 @@ namespace InvoiceReader.Application.Queries.GetInvoices
             public async Task<Result> Handle(Query request, CancellationToken cancellationToken)
             {
                 var clientResponse = await _likvidoClient.GetInvoicesAsync();
-                var result = new Result(clientResponse.Data);
+                var result = new Result(clientResponse?.Data);
 
                 return result;
             }

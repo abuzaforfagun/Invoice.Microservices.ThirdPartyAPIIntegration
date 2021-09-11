@@ -24,11 +24,6 @@ namespace InvoiceProcessor.Domain.Entities
             init => _modifiedOn = value;
         }
 
-        public OutboxItem()
-        {
-            // Required by Auto Mapper
-        }
-
         public OutboxItem(Guid? guid, string commandType, string data, OutBoxStatus status)
         {
             CommandType = commandType;
