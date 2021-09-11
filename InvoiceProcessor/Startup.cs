@@ -72,8 +72,6 @@ namespace InvoiceProcessor
 
             services.AddMediatR(typeof(InvoiceRequestCreated).GetTypeInfo().Assembly);
 
-            services.AddAutoMapper(typeof(Startup).Assembly, typeof(CreateInvoiceRequest).Assembly);
-
             var servicebusConfiguration = new ServiceBusConfiguration();
             Configuration.GetSection("Servicebus").Bind(servicebusConfiguration);
             services.AddSingleton(servicebusConfiguration);
