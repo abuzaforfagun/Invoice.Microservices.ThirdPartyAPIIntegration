@@ -14,7 +14,7 @@ independently.
 
 
 ## Components and their communication
-![Components and their communication](https://user-images.githubusercontent.com/24603959/132550255-f6ea5d6d-7e4e-4eb7-9aea-b8651a3133cc.jpg)
+![Components and their communication](https://user-images.githubusercontent.com/24603959/132898198-71e17f67-1c53-4dd8-90e6-8b632999e4f4.jpg)
 
 #### Client Application
 
@@ -73,7 +73,7 @@ Used as the way of communication among microservie(s) in an asynchronous way.
 ![Process failed request](https://user-images.githubusercontent.com/24603959/132551016-000ed0f2-e205-4193-bacf-ed8c607772b4.jpg)
 
 ### Cache Invalidation
-![Cache Invalidation](https://user-images.githubusercontent.com/24603959/132551018-3878b2d3-b8ef-433c-8987-1f30d8ec9c95.jpg)
+![Cache Invalidation](https://user-images.githubusercontent.com/24603959/132898680-58d3ee2a-7bdf-427c-bf7e-6a5f15d17ec0.jpg)
 
 ### Behind the scenes of retrieving Invoice
 ![Behind the scenes of retrieving Invoice](https://user-images.githubusercontent.com/24603959/132551026-5b5455cb-e44d-4a50-8ee2-d8261d2b3538.jpg)
