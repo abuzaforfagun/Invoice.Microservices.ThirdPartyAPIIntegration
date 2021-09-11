@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,12 +15,6 @@
     <ProjectReference Include="..\InvoiceProcessor.Messages\InvoiceProcessor.Messages.csproj" />
     <ProjectReference Include="..\InvoiceReader.Domain\InvoiceReader.Domain.csproj" />
     <ProjectReference Include="..\InvoiceReader.Messages\InvoiceReader.Messages.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Caching.Abstractions">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
