@@ -10,34 +10,9 @@ namespace InvoiceReader.Application.Queries.GetInvoices
         {
             public List<Invoice> Data { get; set; }
 
-            public Result(List<InvoiceItem> invoiceItems)
+            public Result(List<Invoice> invoices)
             {
-                if (invoiceItems != null)
-                {
-                    Data = new List<Invoice>();
-
-                    foreach (var invoiceItem in invoiceItems)
-                    {
-                        var invoice = new Invoice
-                        (
-                            id: invoiceItem.Id,
-                            referenceId: invoiceItem.Attributes.ReferenceId,
-                            creditorReference: invoiceItem.Attributes.CreditorReference,
-                            currency: invoiceItem.Attributes.Currency,
-                            net: invoiceItem.Attributes.NetAmount,
-                            gross: invoiceItem.Attributes.GrossAmount,
-                            remainder: invoiceItem.Attributes.Remainder,
-                            vat: invoiceItem.Attributes.VatAmount,
-                            expireDate: invoiceItem.Attributes.InvoiceExpirationDate,
-                            dueDate: invoiceItem.Attributes.DueDate,
-                            issueDate: invoiceItem.Attributes.Date,
-                            createdOn: invoiceItem.Attributes.DateCreated,
-                            updatedOn: invoiceItem.Attributes.DateUpdated
-                        );
-
-                        Data.Add(invoice);
-                    }
-                }
+                Data = invoices;
             }
         }
     }

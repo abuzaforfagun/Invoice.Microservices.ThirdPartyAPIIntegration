@@ -1,7 +1,7 @@
 ﻿using Integration.Likvido;
-using Integration.Models;
 using InvoiceReader.Application;
 using InvoiceReader.Application.Queries.GetInvoices;
+using InvoiceReader.Domain.Entity;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
@@ -31,8 +31,8 @@ namespace InvoiceReader.Tests.Application.Queries
         public async Task Get_Invoices_From_Cache_When_Available()
         {
             // Arrange
-            var invoiceItem = new List<InvoiceItem>();
-            var emptyResult = new GetInvoices.Result(invoiceItem);
+            var invoices = new List<Invoice>();
+            var emptyResult = new GetInvoices.Result(invoices);
             var jsonResult = JsonConvert.SerializeObject(emptyResult);
             await _cache.SetStringAsync(Constants.GetInvoicesKey, jsonResult);
             var handler = new GetInvoices.QueryHandler(_clientMock.Object, _cache);
