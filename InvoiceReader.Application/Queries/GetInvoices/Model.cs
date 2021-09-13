@@ -8,7 +8,7 @@ namespace InvoiceReader.Application.Queries.GetInvoices
     {
         public record Result
         {
-            public List<Invoice> Data { get; set; }
+            public List<Invoice> Data { get; init; }
 
             public Result(List<Invoice> invoices)
             {
