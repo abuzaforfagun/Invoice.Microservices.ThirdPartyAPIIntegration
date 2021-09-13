@@ -50,7 +50,6 @@ namespace InvoiceReader
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
-            services.AddAutoMapper(typeof(GetInvoices.MapperConfiguration).Assembly);
             services.AddMediatR(typeof(GetInvoices).GetTypeInfo().Assembly);
 
             services.AddStackExchangeRedisCache(options =>

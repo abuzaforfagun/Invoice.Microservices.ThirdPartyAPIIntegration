@@ -18,10 +18,6 @@ namespace InvoiceReader.Domain.Entity
         public DateTime CreatedOn { get; init; }
         public DateTime UpdatedOn { get; init; }
 
-        public Invoice()
-        {
-            // Required by Auto Mapper
-        }
         public Invoice(Guid id, string referenceId, string creditorReference, string currency, decimal net, decimal gross, decimal remainder, decimal vat, DateTime expireDate, DateTime dueDate, DateTime issueDate, DateTime createdOn, DateTime updatedOn)
         {
             Id = id;

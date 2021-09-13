@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Integration.Models;
 using InvoiceReader.Domain.Entity;
 
 namespace InvoiceReader.Application.Queries.GetInvoices
@@ -7,11 +8,11 @@ namespace InvoiceReader.Application.Queries.GetInvoices
     {
         public record Result
         {
-            public List<Invoice> Data { get; set; }
+            public List<Invoice> Data { get; init; }
 
-            public Result()
+            public Result(List<Invoice> invoices)
             {
-                // Required by Auto Mapper
+                Data = invoices;
             }
         }
     }
