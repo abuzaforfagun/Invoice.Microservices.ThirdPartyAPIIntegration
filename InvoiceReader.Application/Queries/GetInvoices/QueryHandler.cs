@@ -13,12 +13,10 @@ namespace InvoiceReader.Application.Queries.GetInvoices
         public class QueryHandler : IRequestHandler<Query, Result>
         {
             private readonly ILikvidoClient _likvidoClient;
-            private readonly IDistributedCache _cache;
 
-            public QueryHandler(ILikvidoClient likvidoClient, IDistributedCache cache)
+            public QueryHandler(ILikvidoClient likvidoClient)
             {
                 _likvidoClient = likvidoClient;
-                _cache = cache;
             }
 
             public async Task<Result> Handle(Query request, CancellationToken cancellationToken)
