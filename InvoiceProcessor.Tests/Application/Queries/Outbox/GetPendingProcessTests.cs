@@ -1,15 +1,11 @@
-﻿using InvoiceProcessor.Application.Queries.Outbox.GetPendingProcess;
-using InvoiceProcessor.Domain.Entities;
-using InvoiceProcessor.Domain.Interfaces.Outbox;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
-using Moq;
+﻿using InvoiceProcessor.Domain.Entities;
 using InvoiceProcessor.Domain.Enums;
+using InvoiceProcessor.Domain.Interfaces.Outbox;
+using Moq;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System;
 using Xunit;
 using static InvoiceProcessor.Application.Queries.Outbox.GetPendingProcess.GetPendingProcess;
 
@@ -18,14 +14,10 @@ namespace InvoiceProcessor.Tests.Application.Queries.Outbox
     public class GetPendingProcessTests
     {
         private readonly Mock<IOutboxStorage> _outboxStorageMock;
-        private readonly MemoryDistributedCache _cache;
 
         public GetPendingProcessTests()
         {
             _outboxStorageMock = new Mock<IOutboxStorage>();
-
-            var opts = Options.Create(new MemoryDistributedCacheOptions());
-            _cache = new MemoryDistributedCache(opts);
         }
 
         [Fact]
@@ -39,7 +31,7 @@ namespace InvoiceProcessor.Tests.Application.Queries.Outbox
                 .ReturnsAsync(outboxItems);
 
             // Act
-            var result = await handler.Handle(new GetPendingProcess.Query(), new CancellationToken());
+            var result = await handler.Handle(new Query(), new CancellationToken());
 
             // Assert
             Assert.Equal(models, result);
