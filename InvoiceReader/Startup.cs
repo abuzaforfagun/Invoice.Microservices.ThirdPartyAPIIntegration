@@ -15,6 +15,7 @@ using Communication.Messages;
 using Communication.Sender;
 using Integration;
 using Integration.Likvido;
+using InvoiceReader.Application.Infrastructure;
 using InvoiceReader.Application.Queries.GetInvoices;
 using InvoiceReader.Messages;
 using MediatR;
@@ -50,6 +51,8 @@ namespace InvoiceReader
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
+            services.Decorate<ILikvidoClient, CachedLikvidoClient>();
+            
             services.AddMediatR(typeof(GetInvoices).GetTypeInfo().Assembly);
 
             services.AddStackExchangeRedisCache(options =>
