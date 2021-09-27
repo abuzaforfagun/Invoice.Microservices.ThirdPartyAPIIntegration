@@ -11,12 +11,11 @@ namespace Gateway.Middleware
     {
         private const string CorrelationIdHeaderKey = "x-correlation-id";
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
-        public CorrelationMiddleware(RequestDelegate next,
-            ILoggerFactory loggerFactory)
+        private readonly ILogger<CorrelationMiddleware> _logger;
+        public CorrelationMiddleware(RequestDelegate next, ILogger<CorrelationMiddleware> logger)
         {
             _next = next ?? throw new ArgumentNullException(nameof(next));
-            _logger = loggerFactory.CreateLogger<CorrelationMiddleware>();
+            _logger = logger;
         }
         public async Task Invoke(HttpContext httpContext)
         {
