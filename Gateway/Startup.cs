@@ -1,3 +1,4 @@
+using Gateway.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -55,6 +56,7 @@ namespace Gateway
             });
             app.UseCors("CorsPolicy");
 
+            app.UseMiddleware<CorrelationMiddleware>();
             app.UseSerilogRequestLogging();
             app.UseOcelot().Wait();
         }
