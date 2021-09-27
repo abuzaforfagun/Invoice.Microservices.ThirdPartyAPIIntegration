@@ -8,7 +8,6 @@ using System;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Reflection;
-using InvoiceProcessor.Application.Commands.CreateInvoiceRequest;
 using InvoiceProcessor.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +33,7 @@ using InvoiceProcessor.Messages;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
+using Serilog;
 
 namespace InvoiceProcessor
 {
@@ -42,6 +42,10 @@ namespace InvoiceProcessor
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -56,8 +60,6 @@ namespace InvoiceProcessor
             });
             services.AddDbContext<InvoiceDbContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("InvoiceContext")));
-
-            services.AddLogging();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IEntityRepository<,>), typeof(EntityRepository<,>));
@@ -123,6 +125,7 @@ namespace InvoiceProcessor
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSerilogRequestLogging();
 
             app.UseEndpoints(endpoints =>
             {
