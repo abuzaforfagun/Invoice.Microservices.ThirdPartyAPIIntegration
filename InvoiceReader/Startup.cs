@@ -19,6 +19,7 @@ using InvoiceReader.Application.Infrastructure;
 using InvoiceReader.Application.Queries.GetInvoices;
 using InvoiceReader.Messages;
 using MediatR;
+using Serilog;
 
 namespace InvoiceReader
 {
@@ -27,6 +28,10 @@ namespace InvoiceReader
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -87,11 +92,10 @@ namespace InvoiceReader
 
             app.RegisterServiceBus(serviceProvider, distributedCommands, typeof(NewInvoiceAdded).Assembly, busConfig.PrimaryConnectionString);
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSerilogRequestLogging();
 
             app.UseEndpoints(endpoints =>
             {
