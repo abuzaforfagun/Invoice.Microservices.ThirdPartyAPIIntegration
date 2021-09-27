@@ -45,18 +45,18 @@ namespace FakeClient.Controllers
         }
 
         [HttpGet]
-        public async Task<string> GetAll()
+        public async Task<InvoiceResponse> GetAll()
         {
             var invoices = await _cache.GetStringAsync(_apiKey);
 
             if (!string.IsNullOrWhiteSpace(invoices))
             {
-                return invoices;
+                return JsonConvert.DeserializeObject<InvoiceResponse>(invoices);
             }
 
             var jsonResult = JsonConvert.SerializeObject(_dummyInvoices);
             await _cache.SetStringAsync(_apiKey, jsonResult);
-            return jsonResult;
+            return _dummyInvoices;
         }
 
         [HttpPost]
