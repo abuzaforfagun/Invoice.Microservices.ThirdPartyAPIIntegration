@@ -20,7 +20,7 @@ namespace InvoiceProcessor.Infrastructure.Outbox.Services
             var data = (model.Payload as IOutBoxValueEvent)?.Data;
             var jsonData = data == null ? "" : JsonConvert.SerializeObject(data);
 
-            var outBoxItem = new OutboxItem(model.Guid, model.CommandName, jsonData, model.Status);
+            var outBoxItem = new OutboxItem(model.Guid.GetValueOrDefault(), model.CommandName, jsonData, model.Status);
 
             return _storage.Upsert(outBoxItem, model.Guid);
         }

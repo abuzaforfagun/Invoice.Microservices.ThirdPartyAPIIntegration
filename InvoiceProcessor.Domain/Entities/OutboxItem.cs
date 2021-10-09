@@ -7,7 +7,7 @@ namespace InvoiceProcessor.Domain.Entities
     {
         private OutBoxStatus _status;
         private DateTime _modifiedOn;
-        public Guid? Guid { get; }
+        public Guid Guid { get; }
         public string CommandType { get; }
         public string Data { get; }
 
@@ -24,8 +24,9 @@ namespace InvoiceProcessor.Domain.Entities
             init => _modifiedOn = value;
         }
 
-        public OutboxItem(Guid? guid, string commandType, string data, OutBoxStatus status)
+        public OutboxItem(Guid guid, string commandType, string data, OutBoxStatus status)
         {
+            Guid = guid;
             CommandType = commandType;
             Data = data;
             CreatedOn = DateTime.UtcNow;
