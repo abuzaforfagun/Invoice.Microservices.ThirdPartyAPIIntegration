@@ -60,7 +60,7 @@ namespace FakeClient.Controllers
         }
 
         [HttpPost]
-        public async Task Add(SendInvoiceCommand invoice)
+        public async Task Add([FromBody] SendInvoiceCommand invoice)
         {
             var netAmount = invoice.Lines?.Sum(l => l.UnitNetPrice);
             var vat = invoice.Lines?.Sum(l => l.VatRate);
