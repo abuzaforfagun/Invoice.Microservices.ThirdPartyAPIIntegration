@@ -25,10 +25,10 @@ namespace InvoiceProcessor.Tests.Application.Queries.Outbox
         public async Task GetProcessStatus_Should_Return_Process_Status(OutBoxStatus status)
         {
             // Arrange
-            var message = Guid.Empty;
-            var handler = new QueryHandler(_processStatusRepositoryMock.Object);
-            _processStatusRepositoryMock.Setup(x => x.GetProcessStatus(message))
+            _processStatusRepositoryMock.Setup(x => x.GetProcessStatus(It.IsAny<Guid>()))
                 .ReturnsAsync(status);
+
+            var handler = new QueryHandler(_processStatusRepositoryMock.Object);
 
             // Act
             var result = await handler.Handle(new GetProcessStatusQuery(), new CancellationToken());
