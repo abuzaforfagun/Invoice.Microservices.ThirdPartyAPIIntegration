@@ -4,6 +4,7 @@ using InvoiceProcessor.Domain.Interfaces.Outbox;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -21,22 +22,23 @@ namespace InvoiceProcessor.Tests.Application.Queries.Outbox
         }
 
         [Fact]
-        public async Task GetPendingProcess_Should_Return_Empty_When_Pending_Process_Unavailable()
+        public async Task GetPendingProcess_Should_Return_EmptyList_When_Pending_Process_Unavailable()
         {
             // Arrange
-            List<OutboxItem> outboxItems = null;
-            List<Model> models = null;
-            var handler = new QueryHandler(_outboxStorageMock.Object);
+            List<OutboxItem> outboxItems = new List<OutboxItem>();
+            List<Model> expected = new List<Model>();
+
             _outboxStorageMock.Setup(x => x.GetPendingItemsAsync(new CancellationToken()))
                 .ReturnsAsync(outboxItems);
+
+            var handler = new QueryHandler(_outboxStorageMock.Object);
 
             // Act
             var result = await handler.Handle(new Query(), new CancellationToken());
 
             // Assert
-            Assert.Equal(models, result);
+            Assert.Equal(expected, result);
         }
-
 
         [Fact]
         public async Task GetPendingProcess_Should_Return_List_When_Pending_Process_Available()
@@ -58,16 +60,35 @@ namespace InvoiceProcessor.Tests.Application.Queries.Outbox
                 new Model(guid: guid, commandType: "3", data: "c")
             };
 
-            var handler = new QueryHandler(_outboxStorageMock.Object);
             _outboxStorageMock.Setup(x => x.GetPendingItemsAsync(new CancellationToken()))
                 .ReturnsAsync(outboxItems);
+
+            var handler = new QueryHandler(_outboxStorageMock.Object);
 
             // Act
             var results = await handler.Handle(new Query(), new CancellationToken());
 
             // Assert
-            Assert.NotStrictEqual(models, results);
+            Assert.Equal(models, results, new PendingProcessEqualityComparer());
         }
 
+        class PendingProcessEqualityComparer : IEqualityComparer<Model>
+        {
+            public bool Equals(Model x, Model y)
+            {
+                if (x.Guid == y.Guid && x.CommandType == y.CommandType && x.Data == y.Data)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            public int GetHashCode([DisallowNull] Model obj)
+            {
+                return obj.GetHashCode();
+            }
+        }
     }
+
 }
