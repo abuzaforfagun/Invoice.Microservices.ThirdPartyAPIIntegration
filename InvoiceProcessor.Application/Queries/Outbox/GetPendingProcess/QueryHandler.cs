@@ -23,7 +23,7 @@ namespace InvoiceProcessor.Application.Queries.Outbox.GetPendingProcess
                 var pendingItems = await _outboxStorage.GetPendingItemsAsync(cancellationToken);
 
                 return pendingItems?.Select(x => new Model(
-                    guid: x.Guid.Value,
+                    guid: x.Guid,
                     commandType: x.CommandType,
                     data: x.Data))
                     .ToList();
